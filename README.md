@@ -4,7 +4,11 @@
 
 #### Resources
 
-[npm: cors](https://www.npmjs.com/package/cors)
+* [Express](https://expressjs.com/)
+* [Express application generator](https://expressjs.com/en/starter/generator.html)
+* [Knex](https://knexjs.org/)
+* [Knex: Cheat Sheet](https://devhints.io/knex)
+* [npm: cors](https://www.npmjs.com/package/cors)
 
 ## React
 
@@ -54,4 +58,5 @@ Import Google Icon Font and materialize.css into public/index.html
 
 #### Resources
 
-[React Docs: AJAX and APIs](https://reactjs.org/docs/faq-ajax.html)
+* [React](https://reactjs.org/)
+* [React Docs: AJAX and APIs](https://reactjs.org/docs/faq-ajax.html)
