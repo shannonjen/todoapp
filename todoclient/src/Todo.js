@@ -9,8 +9,11 @@ class Todo extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      todos: []
+      todos: [],
+      text: ''
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +36,24 @@ class Todo extends Component {
         }
       )
   }
+
+  handleChange(e) {
+    this.setState({ text: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (!this.state.text.length) {
+      return;
+    }
+    const newTodo = {
+      task: this.state.text,
+    };
+    this.setState(prevState => ({
+      todos: prevState.todos.concat(newTodo),
+      text: ''
+    }));
+  }
   render() {
      const { error, isLoaded, todos } = this.state;
      if (error) {
@@ -41,16 +62,28 @@ class Todo extends Component {
        return <div>Loading...</div>;
      } else {
        return (
-         <ul>
-           {todos.map(todo => (
-             <li key={todo.task}>
-               {todo.task} {todo.created_at}
-             </li>
-           ))}
-         </ul>
+         <div>
+          <h3>Todo</h3>
+          <TodoList todos={this.state.todos} />
+          <form onSubmit={this.handleSubmit}>
+            <input id="new-todo" onChange={this.handleChange} value={this.state.text} />
+            <button> Add #{this.state.todos.length + 1}</button>
+          </form>
+         </div>
        );
      }
    }
 }
 
+class TodoList extends React.Component {
+  render() {
+    return (
+      <ul>
+        {this.props.todos.map(todo => (
+          <li key={todo.task}>{todo.task}</li>
+        ))}
+      </ul>
+    );
+  }
+}
 export default Todo;
