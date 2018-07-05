@@ -3,17 +3,54 @@ import { Row, Input } from 'react-materialize';
 
 
 class Todo extends Component {
-  render(){
-    return(
-    <Row>
-      <Input placeholder="Placeholder" s={6} label="First Name" />
-      <Input s={6} label="Last Name" />
-      <Input s={12} label="disabled" defaultValue="I am not editable" disabled />
-      <Input type="password" label="password" s={12} />
-      <Input type="email" label="Email" s={12} />
-    </Row>
-    )
+
+  constructor(props){
+    super(props)
+    this.state = {
+      error: null,
+      isLoaded: false,
+      todos: []
+    };
   }
+
+  componentDidMount() {
+    fetch('http://localhost:3001/todos')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          this.setState({
+            isLoaded: true,
+            todos: result
+          });
+          console.log(this.state)
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          })
+        }
+      )
+  }
+  render() {
+     const { error, isLoaded, todos } = this.state;
+     if (error) {
+       return <div>Error: {error.message}</div>;
+     } else if (!isLoaded) {
+       return <div>Loading...</div>;
+     } else {
+       return (
+         <ul>
+           {todos.map(todo => (
+             <li key={todo.task}>
+               {todo.task} {todo.created_at}
+             </li>
+           ))}
+         </ul>
+       );
+     }
+   }
 }
 
 export default Todo;
