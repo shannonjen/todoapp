@@ -5,7 +5,7 @@ const environment = process.env.NODE_ENV || 'development';
 const knexConfig = require('../knexfile.js')[environment];
 const knex = require('knex')(knexConfig);
 
-/* GET users listing. */
+/* GET todos */
 router.get('/', function(req, res, next) {
   knex('todos')
   .then(function(todos){
