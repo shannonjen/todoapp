@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Input } from 'react-materialize';
 import TodoList from './TodoList.js'
 
-
 class Todo extends Component {
 
   constructor(props){
@@ -36,6 +35,7 @@ class Todo extends Component {
           })
         }
       )
+
   }
 
   handleChange(e) {
@@ -54,8 +54,15 @@ class Todo extends Component {
       todos: prevState.todos.concat(newTodo),
       text: ''
     }));
+    fetch('http://localhost:3001/todos',{
+      method: 'POST',
+      body: JSON.stringify(newTodo),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
-  
+
   render() {
      const { error, isLoaded, todos } = this.state;
      if (error) {
@@ -69,7 +76,7 @@ class Todo extends Component {
           <TodoList todos={this.state.todos} />
           <form onSubmit={this.handleSubmit}>
             <input id="new-todo" onChange={this.handleChange} value={this.state.text} />
-            <button> Add #{this.state.todos.length + 1}</button>
+            <button> Add Todo</button>
           </form>
          </div>
        );

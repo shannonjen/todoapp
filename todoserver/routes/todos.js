@@ -13,4 +13,14 @@ router.get('/', function(req, res, next) {
   })
 });
 
+router.post('/', function(req, res, next){
+  const {task} = req.body;
+  console.log(req.body);
+  knex('todos')
+  .insert({task})
+  .then(function(){
+    res.redirect('/todos')
+  })
+})
+
 module.exports = router;

@@ -60,3 +60,4 @@ Import Google Icon Font and materialize.css into public/index.html
 
 * [React](https://reactjs.org/)
 * [React Docs: AJAX and APIs](https://reactjs.org/docs/faq-ajax.html)
+* [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
