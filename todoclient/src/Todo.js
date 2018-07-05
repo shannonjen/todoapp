@@ -1,19 +1,50 @@
 import React, { Component } from 'react';
 import { Row, Input } from 'react-materialize';
 import TodoList from './TodoList.js'
+import Spotify from 'spotify-web-api-js';
+
+var s = new Spotify();
 
 class Todo extends Component {
 
   constructor(props){
     super(props)
+    const params = this.getHashParams();
+    const token = params.access_token;
+
+    if (token) {
+      s.setAccessToken(token)
+    }
+
     this.state = {
       error: null,
       isLoaded: false,
+      loggedIn: token ? true : false,
       todos: [],
       text: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  getHashParams() {
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    e = r.exec(q)
+    while (e) {
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+       e = r.exec(q);
+    }
+    return hashParams;
+  }
+
+  getUserPlaylist(){
+    s.getUserPlaylists('jenshannon')
+    .then(function(data) {
+      console.log('User playlists', data);
+    }, function(err) {
+      console.error(err);
+    });
   }
 
   componentDidMount() {
@@ -78,7 +109,18 @@ class Todo extends Component {
             <input id="new-todo" onChange={this.handleChange} value={this.state.text} />
             <button> Add Todo</button>
           </form>
+
+         <a href="http://localhost:3001/login">Log in to Spotify</a>
+
+         <div>
+         { this.state.loggedIn &&
+           <button onClick={() => this.getUserPlaylist()}>
+           Get User playlist
+           </button>
+         }
          </div>
+        </div>
+
        );
      }
    }
