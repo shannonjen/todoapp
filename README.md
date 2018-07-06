@@ -61,3 +61,17 @@ Import Google Icon Font and materialize.css into public/index.html
 * [React](https://reactjs.org/)
 * [React Docs: AJAX and APIs](https://reactjs.org/docs/faq-ajax.html)
 * [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+
+## Spotify API
+
+### Authentication
+
+![Authorization](https://developer.spotify.com/assets/AuthG_AuthoriztionCode.png "Logo Title Text 1")
+
+
+#### Resources
+
+* [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
+* [Spotify Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
+* [Spotify Web Authorization Example](https://github.com/spotify/web-api-auth-examples/tree/master/authorization_code)
+* [A client-side JS wrapper for the Spotify Web API](https://github.com/jmperez/spotify-web-api-js)
