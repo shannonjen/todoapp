@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Input } from 'react-materialize';
 import TodoList from './TodoList.js'
+import SpotifySearch from './SpotifySearch.js'
 import Spotify from 'spotify-web-api-js';
 
 var s = new Spotify();
@@ -48,6 +49,7 @@ class Todo extends Component {
   }
 
   componentDidMount() {
+    console.log("THis is all good")
     fetch('http://localhost:3001/todos')
       .then(res => res.json())
       .then(
@@ -114,9 +116,8 @@ class Todo extends Component {
 
          <div>
          { this.state.loggedIn &&
-           <button onClick={() => this.getUserPlaylist()}>
-           Get User playlist
-           </button>
+
+          <SpotifySearch />
          }
          </div>
         </div>
